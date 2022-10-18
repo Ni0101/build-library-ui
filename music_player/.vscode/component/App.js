@@ -1,16 +1,17 @@
 import html from "../core.js";
-import { connect } from '../store.js'
+import { connect } from "../store.js";
+import Header from "./Header.js";
+import TodoLists from "./TodoLists.js";
+import Footer from "./Footer.js";
 
-const connector = connect()
-
-function App({cars}) {
+function App({ todos }) {
     return html `
-        <ul>
-            ${cars.map(car => `<li>${car}</li>`)}
-        </ul>
-
-        <button onclick="dispatch('ADD', 'Porsche')">ADD CAR</button>
+        <section class="todoapp">
+            ${Header()}
+            ${todos.length > 0 && TodoLists()}
+            ${todos.length > 0 && Footer()}
+        </section>
     `
 }
 
-export default connector(App)
+export default connect()(App)
